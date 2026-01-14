@@ -220,33 +220,34 @@ totPais=10
 txMut=30
 txCros=60
 
-def selecao_pais_torneio(pop, k, tot_Pais):
+def selecao_pais_torneio(pop, totPais):
     pais = []
-    tamanho_grupo = 10
-
-    for i in range(0, len(pop), tamanho_grupo):
-        grupo = pop[i:i + tamanho_grupo]
-        torneio = random.sample(grupo, 3)
-        torneio.sort(key=lambda x: x[0]) # Como tem primeiro o custo e depois o caminho, coloquei para ordenar pelo custo
-        pais.append(torneio[0])
-
+    
+    for i in range(totPais):
+        torneio = random.sample(pop, 10)
+        melhor = min(torneio, key=lambda x: x[0])
+        pais.append(melhor)
+        
     return pais
+
     
 while (ger<=totGer):
     ger+=1
-    tam_grupo = 10
-    Pais = selecao_pais_torneio(Pop, 3, totPais)
+   
+    Pais = selecao_pais_torneio(Pop, totPais)
+    Pop = Pais[:]
     
     #Operador genético de Crossover
     cont=0
+    cont=0
     while(cont<txCros):
         cont+=1
-        p1_idx = random.randint(0, len(Pais)-1)
-        p2_idx = random.randint(0, len(Pais)-1)
-        while p2_idx == p1_idx:
-            p2_idx = random.randint(0, len(Pais)-1)
-        p1 = Pais[p1_idx][1]
-        p2 = Pais[p2_idx][1]
+        p1=random.randint(0, totPais-1)
+        p2=random.randint(0, totPais-1)
+        while (p1==p2):
+            p1=random.randint(0, totPais-1)
+        p1=Pop[p1][1]
+        p2=Pop[p2][1]
         filho=crossover(p1,p2,mov)
         custo=aptidao(filho)
         Pop.append([custo, filho])
@@ -260,8 +261,8 @@ while (ger<=totGer):
     cont=0
     while(cont<txMut):
         cont+=1
-        p_idx = random.randint(0, len(Pais)-1)
-        p1 = Pais[p_idx][1][:]
+        p1=random.randint(0, totPais-1)
+        p1=Pop[p1][1]
         filho=mutacao(p1)
         custo=aptidao(filho)
         Pop.append([custo, filho])
