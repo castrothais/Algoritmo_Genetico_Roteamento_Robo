@@ -41,10 +41,9 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
 
 ### 🔹 Seleção dos Pais
 
-- A população é dividida em **grupos de 10 indivíduos**
-- Em cada grupo, ocorre um **torneio entre 3 indivíduos**
-- O indivíduo com menor custo é selecionado como pai
-- Ao final, são selecionados **10 pais distintos**
+- Para cada pai a ser selecionao, são sorteados 10 da população atual
+- O indivíduo com menor custo é escolhido entre esses 10. Em seguida, é selecionado como pai
+- Esse processo se repete até que sejam escolhidos 10 pais distintos
 
 ### 🔹 Operador de Crossover
 
@@ -57,7 +56,7 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
 
 ### 🔹 Operador de Mutação
 
-- **Mutação direcionada por colisão:** EM ANDAMENTO
+- **Mutação:** EM ANDAMENTO
 
 ## 🛑 Critério de Parada
 
