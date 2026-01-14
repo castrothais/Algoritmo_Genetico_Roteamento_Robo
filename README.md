@@ -48,10 +48,10 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
 ### 🔹 Operador de Crossover
 
 - **Crossover Multiponto (2 pontos de corte)**
-- O cromossomo do filho é formado alternando segmentos dos dois pais
-- Valida:
-  - Limites do ambiente
-  - Alcance do objetivo
+- O cromossomo do filho é formado pela combinação de três segmentos:
+  - Trecho inicial é do primeiro pai
+  - Segundo trecho é do segundo pai
+  - Último trecho é do primeiro pai
 - Caso o objetivo não seja alcançado, o caminho é completado aleatoriamente
 
 ### 🔹 Operador de Mutação
