@@ -8,6 +8,9 @@ Alunos: Hudson Werneck e Thaís de Castro
 #Problema de Roteamento de Robo
 import random
 import matplotlib.pyplot as plt
+import time
+
+tempo_inicio = time.time()
 
 #Ambiente
 random.seed(3)  #para gerar as mesmas instâncias a partir da mesma semente
@@ -82,45 +85,66 @@ def imprimeGrafico(Sol):
 
 def crossover(p1, p2,mov):
     lim = min(len(p1), len(p2))
-    if lim < 20:
-        return p1[:]
 
-    corte1 = random.randint(5, lim//2)
-    corte2 = random.randint(corte1 + 1, lim - 5)
+    corte1 = random.randint(5, lim - 15)
+    corte2 = random.randint(corte1 + 5, lim - 10)
 
     filho = []
     passo = inicio[:]
 
-    for i in range(lim):
-        if i < corte1:
-            mv = p1[i]
-        elif i < corte2:
-            mv = p2[i]
-        else:
-            mv = p1[i]
-
+    for i in range(corte1):
+        mv = p1[i]
         npasso = passo[:]
         npasso[0] += movimentos[mv][0]
         npasso[1] += movimentos[mv][1]
 
-        if (npasso[0] >= 0 and npasso[0] < N and
-            npasso[1] >= 0 and npasso[1] < N):
+        if (npasso[0]>=0 and npasso[0]<N and npasso[1]>=0 and npasso[1]<N):
             filho.append(mv)
             passo = npasso[:]
 
-        if (passo[0] == objetivo[0] and passo[1] == objetivo[1]):
+        if passo == objetivo:
             return filho
-        
-    while (passo != objetivo):
-        mv=random.randint(1, len(mov))
-        npasso=passo[:]
-        npasso[0]+=movimentos[mv][0]
-        npasso[1]+=movimentos[mv][1]
+
+    
+    for i in range(corte1, corte2):
+        mv = p2[i]
+        npasso = passo[:]
+        npasso[0] += movimentos[mv][0]
+        npasso[1] += movimentos[mv][1]
+
         if (npasso[0]>=0 and npasso[0]<N and npasso[1]>=0 and npasso[1]<N):
             filho.append(mv)
-            passo=npasso[:]
-        if (npasso[0]==objetivo[0] and npasso[1]==objetivo[1]):
-            return(filho)
+            passo = npasso[:]
+
+        if passo == objetivo:
+            return filho
+
+    
+    for i in range(corte2, len(p1)):
+        mv = p1[i]
+        npasso = passo[:]
+        npasso[0] += movimentos[mv][0]
+        npasso[1] += movimentos[mv][1]
+
+        if (npasso[0]>=0 and npasso[0]<N and npasso[1]>=0 and npasso[1]<N):
+            filho.append(mv)
+            passo = npasso[:]
+
+        if passo == objetivo:
+            return filho
+
+    while passo != objetivo:
+        mv = random.randint(1, len(mov))
+        npasso = passo[:]
+        npasso[0] += movimentos[mv][0]
+        npasso[1] += movimentos[mv][1]
+
+        if (0 <= npasso[0] < N and 0 <= npasso[1] < N):
+            filho.append(mv)
+            passo = npasso[:]
+
+        if passo == objetivo:
+            return filho
 
 
 def mutacao(p1):
@@ -280,3 +304,7 @@ Pop = Pop[:tamPop]
 custo=aptidao(Best)
 print('Custo da Best', custoBest)
 imprimeGrafico(Best)
+
+tempo_fim = time.time() 
+tempo_total = tempo_fim - tempo_inicio
+print(f"Tempo de execução: {tempo_total:.2f} segundos")
