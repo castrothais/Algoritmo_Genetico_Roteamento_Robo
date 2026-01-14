@@ -56,7 +56,21 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
 
 ### 🔹 Operador de Mutação
 
-- **Mutação:** EM ANDAMENTO
+- **Mutação:**
+Mutação **híbrida** com dois tipos principais:
+
+1. **Alteração simples** (75% de chance)  
+   - Escolhe aleatoriamente uma posição no cromossomo  
+   - Substitui o movimento atual por outro movimento diferente (entre os 4 possíveis)
+
+2. **Troca (swap)** (25% de chance)  
+   - Seleciona duas posições diferentes no caminho  
+   - Troca os movimentos entre essas posições
+
+Após a mutação:
+- Remove movimentos que levariam o robô para fora da grade
+- Se necessário, completa o caminho até o objetivo com movimentos aleatórios válidos
+- Durante o reparo, evita movimentos que levem diretamente a obstáculos
 
 ## 🛑 Critério de Parada
 
