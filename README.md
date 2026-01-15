@@ -37,7 +37,12 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
 | Penalização por obstáculo | 50 |
 | Critério de parada | 200 gerações sem melhora |
 
----
+### 🔹 Controle de Aleatoridade (seed)
+
+- Foi utilizada uma *seed* fixa `random.seed(3)` exclusivamente para a geração do ambiente,
+  garantindo que a disposição dos obstáculos seja sempre a mesma
+- Após a criação do ambiente, a *seed* é redefinida `random.seed()`, permitindo que o
+  Algoritmo Genético apresente soluções distintas a cada execução
 
 ### 🔹 Seleção dos Pais
 
@@ -97,5 +102,5 @@ O projeto inclui a visualização gráfica:
 
 ## ✍️ Autoria
 
-Projeto desenvolvido por **Thais Sampaio e Hudson Werneck**  
+Projeto desenvolvido por **Thaís Sampaio e Hudson Werneck**  
 Disciplina: Otimização Combinatória
