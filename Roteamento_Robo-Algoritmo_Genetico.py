@@ -58,12 +58,19 @@ def imprimeGrafico(Sol):
         x.append(obstaculos[i][0])
         y.append(obstaculos[i][1])
     plt.scatter(x, y, color='y')
-    
+    x = []
+    y = []
+    x.append(inicio[0])
+    y.append(inicio[1])
+    plt.scatter(x, y, color='c')
+   
     x = []
     y = []
     w = []
     z = []
-    passo = inicio[:]
+    a = []
+    b = []
+    passo=inicio[:]
     for i in range(len(Sol)):
         mov = Sol[i]
         cx = movimentos[mov][0]
@@ -75,9 +82,15 @@ def imprimeGrafico(Sol):
         if tuple(passo) in obstaculos:
             w.append(passo[0])
             z.append(passo[1])
+        if passo == objetivo:
+            a.append(passo[0])
+            b.append(passo[1])
     plt.scatter(x, y, color='b')
     plt.scatter(w, z, color='r')
+    plt.scatter(a, b, color='g')
+
     plt.show()
+    return()
 
 def crossover(p1, p2, mov):
     lim = min(len(p1), len(p2))
