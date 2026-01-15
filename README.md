@@ -41,9 +41,9 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
 
 ### 🔹 Seleção dos Pais
 
-- Para cada pai a ser selecionao, são sorteados 10 da população atual
-- O indivíduo com menor custo é escolhido entre esses 10. Em seguida, é selecionado como pai
-- Esse processo se repete até que sejam escolhidos 10 pais distintos
+- Para cada pai a ser selecionado, são sorteados 10 indivíduos da população atual
+- O indivíduo com menor custo é escolhido entre esses 10 e selecionado como pai
+- Esse processo se repete até que sejam selecionados 10 pais, podendo ocorrer repetição de indivíduos, uma vez que os torneios são realizados de forma independente
 
 ### 🔹 Operador de Crossover
 
@@ -52,6 +52,8 @@ O robô se move em uma grade `N x N`, podendo realizar movimentos para cima, bai
   - Trecho inicial é do primeiro pai
   - Segundo trecho é do segundo pai
   - Último trecho é do primeiro pai
+- Durante o crossover, são realizadas validações para garantir que o robô não ultrapasse os limites da grade
+- Caso o objetivo seja alcançado durante a construção do cromossomo, o processo é interrompido antecipadamente
 - Caso o objetivo não seja alcançado, o caminho é completado aleatoriamente
 
 ### 🔹 Operador de Mutação
@@ -68,6 +70,7 @@ Mutação **híbrida** com dois tipos principais:
    - Troca os movimentos entre essas posições
 
 Após a mutação:
+
 - Remove movimentos que levariam o robô para fora da grade
 - Se necessário, completa o caminho até o objetivo com movimentos aleatórios válidos
 - Durante o reparo, evita movimentos que levem diretamente a obstáculos
